@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>query-builder</title>
+		<link rel="stylesheet" href="js/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="js/jstree/dist/themes/default/style.min.css" />
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="js/bootstrap-select/css/bootstrap-select.min.css">
+
+	</head>
+	<body>
+
+		<div class="row">
+			<div class="col-md-2">
+				<div class="panel panel-primary">
+					<div class="panel-heading">表结构</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-sm-12">
+								<input class="form-control" type="text" id="keywordSearch" placeholder="请输入关键字搜索">
+							</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-sm-12">
+								<div id="tableTree"></div>
+							</div>
+
+						</div>
+
+					</div>
+					<div class="panel-footer">
+						已选择的表：
+						<div id="showSelectTable">
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-md-7">
+				<div class="panel panel-primary">
+					<div class="panel-heading">查询</div>
+					<div class="panel-body">
+						<div class="select">
+							<button type="button" class="btn btn-primary">
+								<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Select
+							</button>
+							<div class="selectBody">
+
+							</div>
+						</div>
+						<br />
+						<div class="from">
+							<button type="button" class="btn btn-primary" id="fromBtn">
+								<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> From
+							</button>
+							<div class="fromBody">
+
+							</div>
+						</div>
+						<div class="where">
+							<button type="button" class="btn btn-primary">
+								<span class="glyphicon glyphicon-indent-left" aria-hidden="true"></span> Where
+							</button>
+							<div class="whereBody">
+
+							</div>
+						</div>
+						<div class="group-by">
+							<button type="button" class="btn btn-primary">
+								<span class="glyphicon glyphicon-list" aria-hidden="true"></span> Group By
+							</button>
+							<div class="group-by-body">
+
+							</div>
+						</div>
+						<div class="having">
+							<button type="button" class="btn btn-primary">
+								<span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Having
+							</button>
+							<div class="havingBody">
+
+							</div>
+						</div>
+						<div class="order-by">
+							<button type="button" class="btn btn-primary">
+								<span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Order by
+							</button>
+							<div class="order-by-body">
+
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="panel panel-primary">
+					<div class="panel-heading">SQL</div>
+						<div class="panel-body">
+							
+						</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- sql执行结果 表格，echart图 -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+					<div class="panel-body">
+						
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		<!-- select模板 -->
+		<div class="selectTemplate">
+			<form class="form-inline">
+				<div class="form-group">
+					<select class="form-control selectpicker">
+						<option>COUNT</option>
+						<option>MAX</option>
+						<option>MIN</option>
+						<option>SUM</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<select class="form-control selectpicker">
+						<optgroup label="T_BZKS">
+							<option>KSH</option>
+							<option>XH</option>
+							<option>XM</option>
+						</optgroup>
+						<optgroup label="T_JZGXX">
+							<option>JGH</option>
+							<option>XM</option>
+							<option>XB</option>
+						</optgroup>
+					</select>
+				</div>
+				<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+				<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
+			</form>
+		</div>
+
+		<!-- from模板1 -->
+		<div class="fromTemplateOne" style="margin-left:20%" hidden="hidden">
+			<select class="selectTable">
+
+			</select>
+			<button type="button" class="btn btn-success addJoinBtn"><span class="glyphicon glyphicon-resize-small"></span> join</button>
+			<button type="button" class="btn btn-danger removeJoinBtn"><span class="glyphicon glyphicon-minus"></span></button>
+
+		</div>
+
+		<!-- from模板2 -->
+		<div class="fromTemplateTwo" hidden="hidden">
+			<div style="margin-top: 2%;">
+				<select class="form-control join">
+
+				</select>
+				<span style="margin-left: 20%;">
+					<select class="form-control fieldsOne">
+					
+					</select>
+				</span>
+				
+				<select class="form-control comparisons">
+
+				</select>
+				<select class="form-control fieldsTwo">
+
+				</select>
+			</div>
+			<div style="margin-top: 2%;">
+				<span style="margin-left: 20%;">
+					<select class="form-control selectTable">
+						<option value="">请选择</option>
+					</select>
+				</span>
+				<button type="button" class="btn btn-success addJoinBtn"><span class="glyphicon glyphicon-resize-small"></span> join</button>
+				<button type="button" class="btn btn-danger removeJoinBtnTwo"><span class="glyphicon glyphicon-minus"></span></button>
+				
+			</div>
+
+
+
+		</div>
+
+
+
+		<script src="js/jquery-3.5.0.min.js"></script>
+		<script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script src="js/jstree/dist/jstree.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="js/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+		<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+		<script src="js/bootstrap-select/js/i18n/defaults-zh_CN.js"></script>
+		<script src="js/custom.js"></script>
+
+	</body>
+</html>

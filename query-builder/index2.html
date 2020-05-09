@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="js/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="js/jstree/dist/themes/default/style.min.css" />
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="js/bootstrap-select/css/bootstrap-select.min.css">
+
+	</head>
+	<body>
+		<!-- 标准选择框 -->
+		<select class="selectpicker">
+			<option>Mustard</option>
+			<option>Ketchup</option>
+			<option>Relish</option>
+		</select>
+
+		<!--选择带有optgroup的框-->
+		<select class="selectpicker">
+			<optgroup label="Picnic">
+				<option>Mustard</option>
+				<option>Ketchup</option>
+				<option>Relish</option>
+			</optgroup>
+			<optgroup label="Camping">
+				<option>Tent</option>
+				<option>Flashlight</option>
+				<option>Toilet Paper</option>
+			</optgroup>
+		</select>
+
+		<!--多个选择框-->
+		<select class="selectpicker" multiple>
+			<option>Mustard</option>
+			<option>Ketchup</option>
+			<option>Relish</option>
+		</select>
+
+		<!--高亮搜索-->
+		<select class="selectpicker" data-live-search="true">
+			<option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+			<option data-tokens="mustard">Burger, Shake and a Smile</option>
+			<option data-tokens="frosting">Sugar, Spice and all things nice</option>
+		</select>
+
+		<!--限制选择数量-->
+		<select class="selectpicker" multiple data-max-options="2">
+			<option>Mustard</option>
+			<option>Ketchup</option>
+			<option>Relish</option>
+		</select>
+
+		<select class="selectpicker" multiple>
+			<optgroup label="Condiments" data-max-options="2">
+				<option>Mustard</option>
+				<option>Ketchup</option>
+				<option>Relish</option>
+			</optgroup>
+			<optgroup label="Breads" data-max-options="2">
+				<option>Plain</option>
+				<option>Steamed</option>
+				<option>Toasted</option>
+			</optgroup>
+		</select>
+
+		<!--自定义按钮文字-->
+		<select class="selectpicker" multiple title="Choose one of the following...">
+			<option>Mustard</option>
+			<option>Ketchup</option>
+			<option>Relish</option>
+		</select>
+
+		<!--在各个选项上设置标题属性，以在选择选项时显示替代文本：-->
+		<select class="selectpicker">
+			<option title="Combo 1">Hot Dog, Fries and a Soda</option>
+			<option title="Combo 2">Burger, Shake and a Smile</option>
+			<option title="Combo 3">Sugar, Spice and all things nice</option>
+		</select>
+
+		<!--
+		使用多选选择中的data-selected-text-format属性指定如何显示选择。
+		
+		支持的值为：
+		
+		values：以逗号分隔的选定值列表（默认）
+		count：如果选择一项，则显示选项值。 如果选择了多个，则显示选定项目的数量，例如 2之6已选择
+		count> x：其中x是显示格式从值更改为count时选择的项目数
+		静态：无论选择什么，始终显示选择标题（占位符）
+		-->
+		<select class="selectpicker" multiple data-selected-text-format="count">
+			<option>Mustard</option>
+			<option>Ketchup</option>
+			<option>Relish</option>
+		</select>
+
+		<select class="selectpicker" multiple data-selected-text-format="count > 3">
+			<option>Mustard</option>
+			<option>Ketchup</option>
+			<option>Relish</option>
+			<option>Onions</option>
+		</select>
+
+		<!--设置按钮样式-->
+		<select class="selectpicker" data-style="btn-primary">
+			...
+		</select>
+
+		<select class="selectpicker" data-style="btn-info">
+			...
+		</select>
+
+		<select class="selectpicker" data-style="btn-success">
+			...
+		</select>
+
+		<select class="selectpicker" data-style="btn-warning">
+			...
+		</select>
+
+		<select class="selectpicker" data-style="btn-danger">
+			...
+		</select>
+
+		<!--显示标记图标-->
+		<select class="selectpicker show-tick">
+			<option>Mustard</option>
+			<option>Ketchup</option>
+			<option>Relish</option>
+		</select>
+
+		<!-- Bootstrap菜单箭头可以与show-menu-arrow类一起添加： -->
+		<select class="selectpicker show-menu-arrow">
+			<option>Mustard</option>
+			<option>Ketchup</option>
+			<option>Relish</option>
+		</select>
+
+		<!--添加到选项的类和样式将转移到选择框：-->
+		<style>
+			.special {
+				font-weight: bold !important;
+				color: #fff !important;
+				background: #bc0000 !important;
+				text-transform: uppercase;
+			}
+		</style>
+		<select class="selectpicker">
+			<option>Mustard</option>
+			<option class="special">Ketchup</option>
+			<option style="background: #5cb85c; color: #fff;">Relish</option>
+		</select>
+
+
+		<!--在网格列或任何自定义父元素中包装选择内容，以轻松实施所需的宽度。-->
+		<div class="row">
+		  <div class="col-sm-3">
+		    <div class="form-group">
+		      <select class="selectpicker form-control">
+		        <option>Mustard</option>
+		        <option>Ketchup</option>
+		        <option>Relish</option>
+		      </select>
+		    </div>
+		  </div>
+		</div>
+		
+		<!--或者，使用data-width属性设置选择的宽度。 
+		将data-width设置为'auto'可以将选择的宽度自动调整为最宽的选项。 
+		“ fit”会自动将选择的宽度调整为当前选择的选项的宽度。
+		 还可以指定一个精确值，例如300px或50％。
+		-->
+		<select class="selectpicker" data-width="auto">
+		  ...
+		</select>
+		<select class="selectpicker" data-width="fit">
+		  ...
+		</select>
+		<select class="selectpicker" data-width="100px">
+		  ...
+		</select>
+		<select class="selectpicker" data-width="75%">
+		  ...
+		</select>
+		
+		<!--自定义图标-->
+		<select class="selectpicker">
+		  <option data-icon="glyphicon glyphicon-triangle-right">Ketchup</option>
+		</select>
+		
+		<!--将自定义HTML插入带有data-content属性的选项中：-->
+		<select class="selectpicker">
+		  <option data-content="<span class='badge badge-success'>Relish</span>">Relish</option>
+		</select>
+		
+		<!--使用data-subtext属性将subtext添加到选项或optgroup中：-->
+		<select class="selectpicker" data-size="5">
+		  <option data-subtext="Heinz">Ketchup</option>
+		</select>
+		
+		<!--自定义菜单-->
+		<!--为数据大小指定一个数字，以选择要在菜单中显示的最大项目数。-->
+		<select class="selectpicker" data-size="5">
+			<option>Mustard</option>
+			<option>Ketchup</option>
+			<option>Relish</option>
+		</select>
+		
+		<!--选择/取消选择所有选项-->
+		<select class="selectpicker" multiple data-actions-box="true">
+		  <option>Mustard</option>
+		  <option>Ketchup</option>
+		  <option>Relish</option>
+		</select>
+		<!--将data-divider =“ true”添加到选项以将其变成分隔符。-->
+		<select class="selectpicker" data-size="5">
+		  <option data-divider="true"></option>
+		  <option>Mustard</option>
+		  <option>Ketchup</option>
+		  <option>Relish</option>
+		</select>
+		
+		<!--在下拉菜单中添加标题-->
+		<select class="selectpicker" data-header="Select a condiment">
+		  <option>Mustard</option>
+		  <option>Ketchup</option>
+		  <option>Relish</option>
+		</select>
+		<!--将选择菜单附加到特定元素，例如 容器：“ body”或data-container =“。main-content”。
+		 如果select元素位于具有overflow：隐藏元素的元素内，这将很有用。-->
+		<div style="overflow:hidden;">
+		  <select class="selectpicker">
+		    <option>Mustard</option>
+		    <option>Ketchup</option>
+		    <option>Relish</option>
+		  </select>
+		  <select class="selectpicker" data-container="body">
+		    <option>Mustard</option>
+		    <option>Ketchup</option>
+		    <option>Relish</option>
+		  </select>
+		</div>
+		
+		<!--默认情况下，dropupAuto设置为true，它将自动确定菜单是否应显示在选择框的上方或下方。 
+		如果dropupAuto设置为false，则通过将.dropup类添加到选择中来手动使选择成为一个下拉菜单。-->
+		<select class="selectpicker dropup" data-dropup-auto="false">
+			<option>Mustard</option>
+			<option>Ketchup</option>
+			<option>Relish</option>
+		</select>
+		<!--禁用选择-->
+		<select class="selectpicker" disabled>
+		  <option>Mustard</option>
+		  <option>Ketchup</option>
+		  <option>Relish</option>
+		</select>
+		<!--禁用选项-->
+		<select class="selectpicker">
+		  <option>Mustard</option>
+		  <option disabled>Ketchup</option>
+		  <option>Relish</option>
+		</select>
+		<!--禁用选项组-->
+		<select class="selectpicker test">
+		  <optgroup label="Picnic" disabled>
+		    <option>Mustard</option>
+		    <option>Ketchup</option>
+		    <option>Relish</option>
+		  </optgroup>
+		  <optgroup label="Camping">
+		    <option>Tent</option>
+		    <option>Flashlight</option>
+		    <option>Toilet Paper</option>
+		  </optgroup>
+		</select>
+		<script src="js/jquery-3.5.0.min.js"></script>
+		<script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script src="js/jstree/dist/jstree.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="js/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+		<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+		<script src="js/bootstrap-select/js/i18n/defaults-zh_CN.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,123 @@
+{
+	"list": [{
+		"id": "T_BZKS",
+		"text": "T_BZKS",
+		"icon": "",
+		"children": [{
+				"id": "T_BZKS.KSH",
+				"text": "KSH",
+				"icon": "",
+				"children": [],
+				"li_attr": {},
+				"a_attr": {}
+			},
+			{
+				"id": "T_BZKS.XH",
+				"text": "XH",
+				"icon": "",
+				"children": [],
+				"li_attr": {},
+				"a_attr": {}
+			},
+			{
+				"id": "T_BZKS.XM",
+				"text": "XM",
+				"icon": "",
+				"children": [],
+				"li_attr": {},
+				"a_attr": {}
+			},
+			{
+				"id": "T_BZKS.SFZJH",
+				"text": "SFZJH",
+				"icon": "",
+				"children": [],
+				"li_attr": {},
+				"a_attr": {}
+			}
+		],
+		"li_attr": {},
+		"a_attr": {}
+	}, {
+		"id": "T_JZGXX",
+		"text": "T_JZGXX",
+		"icon": "",
+		"children": [{
+				"id": "T_JZGXX.JGH",
+				"text": "JGH",
+				"icon": "",
+				"children": [],
+				"li_attr": {},
+				"a_attr": {}
+			},
+			{
+				"id": "T_JZGXX.XM",
+				"text": "XM",
+				"icon": "",
+				"children": [],
+				"li_attr": {},
+				"a_attr": {}
+			},
+			{
+				"id": "T_JZGXX.XB",
+				"text": "XB",
+				"icon": "",
+				"children": [],
+				"li_attr": {},
+				"a_attr": {}
+			},
+			{
+				"id": "T_JZGXX.JZGLB",
+				"text": "JZGLB",
+				"icon": "",
+				"children": [],
+				"li_attr": {},
+				"a_attr": {}
+			}
+		],
+		"li_attr": {},
+		"a_attr": {}
+	}, {
+		"id": "T_KY_XM",
+		"text": "T_KY_XM",
+		"icon": "",
+		"children": [{
+				"id": "T_KY_XM.KYDLDM",
+				"text": "KYDLDM",
+				"icon": "",
+				"children": [],
+				"li_attr": {},
+				"a_attr": {}
+			},
+			{
+				"id": "T_KY_XM.XMBH",
+				"text": "XMBH",
+				"icon": "",
+				"children": [],
+				"li_attr": {},
+				"a_attr": {}
+			},
+			{
+				"id": "T_KY_XM.XMMC",
+				"text": "XMMC",
+				"icon": "",
+				"children": [],
+				"li_attr": {},
+				"a_attr": {}
+			},
+			{
+				"id": "T_KY_XM.LXRQ",
+				"text": "LXRQ",
+				"icon": "",
+				"children": [],
+				"li_attr": {},
+				"a_attr": {}
+			}
+		],
+		"li_attr": {},
+		"a_attr": {}
+	}],
+	"success": true,
+	"message": "",
+	"errorCode": 0
+}
