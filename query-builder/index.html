@@ -8,7 +8,21 @@
 		<link rel="stylesheet" href="js/jstree/dist/themes/default/style.min.css" />
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="js/bootstrap-select/css/bootstrap-select.min.css">
-
+		<style>
+			.whereTemplateOne{
+			    background-color: #fff;
+			    padding: 15px;
+			    border-radius: 5px;
+			    border: solid 1px #666;
+			}
+			.whereBody,.fromTemplateOnee,.selectTemplateOne{
+				margin-left: 20px;
+				margin-top: 10px;
+			}
+			.whereTemplate,{
+				margin-top: 10px;
+			}
+		</style>
 	</head>
 	<body>
 
@@ -72,7 +86,7 @@
 						</div>
 						<br />
 						<div class="group-by">
-							<button type="button" class="btn btn-primary">
+							<button type="button" class="btn btn-primary" id="groupByBtn">
 								<span class="glyphicon glyphicon-list" aria-hidden="true"></span> Group By
 							</button>
 							<div class="group-by-body">
@@ -124,7 +138,7 @@
 		</div>
 
 		<!-- select模板 -->
-		<div class="selectTemplate" hidden="hidden" style="margin-top: 2%;">
+		<div class="selectTemplate" hidden="hidden">
 			<form class="form-inline">
 				<div class="form-group">
 					<select class="form-control expression">
@@ -142,7 +156,7 @@
 		</div>
 
 		<!-- from模板1 -->
-		<div class="fromTemplateOne" style="margin-left:20%" hidden="hidden">
+		<div class="fromTemplateOne" hidden="hidden">
 			<select class="selectTable">
 
 			</select>
@@ -153,11 +167,11 @@
 
 		<!-- from模板2 -->
 		<div class="fromTemplateTwo" hidden="hidden">
-			<div style="margin-top: 2%;">
+			<div style="margin-top: 10px;">
 				<select class="form-control join">
 
 				</select>
-				<span style="margin-left: 20%;">
+				<span style="margin-left: 20px;">
 					<select class="form-control fieldsOne">
 					
 					</select>
@@ -170,8 +184,8 @@
 
 				</select>
 			</div>
-			<div style="margin-top: 2%;">
-				<span style="margin-left: 20%;">
+			<div style="margin-top: 10px;">
+				<span style="margin-left: 20px;">
 					<select class="form-control selectTable">
 						<option value="">请选择</option>
 					</select>
@@ -182,14 +196,14 @@
 		</div>
 		
 		<!-- where模板 -->
-		<div class="whereTemplate" hidden="hidden" style="margin-top: 2%;">
+		<div class="whereTemplate" hidden="hidden">
 			<select class="form-control logicalOperators">		
 			
 			</select>
 			<button class="btn btn-success addCondition"><span class="glyphicon glyphicon-plus-sign"></span> Add Condition</button>
 			<button class="btn btn-success addGroup"><span class="glyphicon glyphicon-plus-sign"></span> Add Group</button>
 			<button class="btn btn-danger removeGroup"><span class="glyphicon glyphicon-minus-sign"></span> Remove Group</button>
-			<div class="group-conditions">
+			<div class="whereBody">
 			
 			</div>
 			
@@ -216,8 +230,18 @@
 				<button class="btn btn-danger removeCondition"><span class="glyphicon glyphicon-minus-sign"></span></button>
 			</div>
 		</div>
-
-
+		
+		<!--group by模板-->
+		<div class="groupByTemplate" style="display: none;">
+			<select class = "form-control groupbyFields"></select>
+			<button class="btn btn-success groupbyAdd"><span class="glyphicon glyphicon-plus"></span></button>
+			<button class="btn btn-danger groupbyRemove"><span class="glyphicon glyphicon-minus"></span></button>
+		</div>
+		
+		<!--order by模板-->
+		<div class="orderByTemplate">
+			
+		</div>
 		<script src="js/jquery-3.5.0.min.js"></script>
 		<script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 		<script src="js/jstree/dist/jstree.min.js"></script>

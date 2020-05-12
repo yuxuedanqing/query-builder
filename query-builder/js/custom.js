@@ -404,7 +404,7 @@ $(function(){
 			}
 		}
 		if(flag){
-			addWhere(e);
+			addWhere(this, e);
 		}else{
 			alert("请先从from中选择表")
 		}
@@ -414,10 +414,16 @@ $(function(){
 	 * 添加whereTemplate
 	 * @param {Object} e
 	 */
-	function addWhere(e){
+	function addWhere(that, e){
 		let whereTemplate = $(".whereTemplate").clone();
 		addWhereOptions(whereTemplate);
-		$(whereTemplate).appendTo($(".whereBody"));
+		$(whereTemplate).appendTo($(that).siblings('.whereBody')).on("click",".addCondition",function(e){
+			addCondition(this,e);
+		}).on("click",".removeGroup",function(e){
+			 removeGroup(this, e);
+		}).on("click",".addGroup",function(e){
+			addWhere(this,e);
+		});
 		whereTemplate.attr("class","whereTemplateOne");
 		whereTemplate.show();
 		e.preventDefault();
@@ -444,16 +450,18 @@ $(function(){
 	/**
 	 * addCondition点击事件
 	 */
-	$(".whereBody").on("click",".addCondition",function(e){
-		let conditionTemplate = $('.conditionTemplate').clone();
+	function addCondition(that,e){
+		var conditionTemplate = $('.conditionTemplate').clone(true);
 		conditionTemplate.show();
 		addConditionOption(conditionTemplate);
-		$(conditionTemplate).appendTo($(".group-conditions"));
+		$(conditionTemplate).appendTo($(that).siblings(".whereBody")).on("click",".removeCondition",function(e){
+			removeCondition(this, e);
+		});
 		conditionTemplate.attr('class','conditionTemplateOne');
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		e.stopPropagation();
-	});
+	}
 	
 	/**
 	 * 给conditionTemplate模板的select添加option
@@ -485,6 +493,64 @@ $(function(){
 		});
 	}
 	
+	/**
+	 * 移除where group
+	 * @param {Object} that
+	 * @param {Object} e
+	 */
+	function removeGroup(that,e){
+		$(that).closest('.whereTemplateOne').remove();
+		e.preventDefault();
+		e.stopImmediatePropagation();
+		e.stopPropagation();
+	}
+	
+	/**
+	 * 移除where condition
+	 * @param {Object} that
+	 * @param {Object} e
+	 */
+	function removeCondition(that,e){
+		$(that).parents('.conditionTemplateOne').remove();
+		e.preventDefault();
+		e.stopImmediatePropagation();
+		e.stopPropagation();
+	}
+	
+	// group by部分
+	$("#groupByBtn").click(function(e){
+		// 判断group by是否以及生成了groupByTemplate
+		let groupByTemplate = $(".group-by-body").find(".groupByTemplateOne");
+		if(groupByTemplate.length>0){
+			return;
+		}
+		// 判断from部分是否已经选择了表
+		let selectedTable = $(".fromBody").find("select.selectTable option:selected");
+		let flag = false;
+		for(let table=0;table<selectedTable.length;table++){
+			let ttable = selectedTable[table].value;
+			if(ttable!=""){
+				flag = true;
+			}
+		}
+		if(flag){
+			addGroupBy(this,e);
+		}else{
+			alert("请先从from中选择表");
+			return;
+		}
+	});
+	
+	/**
+	 * 添加groupByTemplate
+	 * @param {Object} that
+	 * @param {Object} e
+	 */
+	function addGroupBy(that, e){
+		let groupByTemplate = $(".groupByTemplate").clone();
+		groupByTemplate.show();
+		$(groupByTemplate).appendTo($(that).siblings('.group-by-body')).on('click','.groupbyAdd');
+	}
 	
 	showTableTree();
 	queryNode();
