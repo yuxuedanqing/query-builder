@@ -13,6 +13,9 @@ $(function(){
 	// 定义全局选中的表父子节点信息
 	var selectedTableNodeInfo = new Map();
 	
+	// 定义from选中的表的父子节点信息
+	var fromSelectedTable = new Map();
+	
 	// 定义比较规则
 	var comparisons = ['=', '<>', '<', '<=', '>', '>=', 'LIKE', 'NOT LIKE', 'IS', 'IS NOT','IN','NOT IN', 'EXISTS','NOT EXISTS','BETWEEN','NOT BETWEEN'];
 	
@@ -117,12 +120,13 @@ $(function(){
 	 * @param {Object} data
 	 * @param {Object} flag true:选择 false:取消选择
 	 */
-	
 	function selectedTableTreeNode(parent,data,flag) {
 		let sel = data.node;
+		let selected = data.selected;
 		// 判断选中的是不是父节点#，如果是则true,不是则取false
 		let is_parent = sel.parent==="#" ? true : false;
 		let childrenList = new Set();
+		
 		if(flag){
 			if(is_parent){
 				let childrenListNode = sel.children;
@@ -130,11 +134,18 @@ $(function(){
 					let children = item.split(".")[1];
 					childrenList.add(children);
 				});
+				selectedTableNodeInfo.set(parent,childrenList);
 			}else{
-				let childrenText = sel.text;
-				childrenList.add(childrenText);
+				selected.forEach(function(item, index, array){
+					let children_name = item.split(".")[1];
+					let parent_name = item.split(".")[0];
+					if(parent_name==parent){
+						childrenList.add(children_name);
+						selectedTableNodeInfo.set(parent_name,childrenList);
+					}
+				});
+				
 			}
-			selectedTableNodeInfo.set(parent,childrenList);
 		}else{
 			if(is_parent){
 				selectedTableNodeInfo.delete(parent);
@@ -211,13 +222,6 @@ $(function(){
 		e.stopPropagation();
 	});
 	
-	/**
-	 * 清除clone
-	 * @param {Object} fromTemplateTwo
-	 */
-	function cleanCloneTemplate(fromTemplateTwo){
-		
-	}
 	
 	/**
 	 * 添加option到fromTemplate
@@ -256,9 +260,7 @@ $(function(){
 	 */
 	function fieldsSelectpicker(fromTemplate){
 		let fieldsOne = $(fromTemplate).find('select.fieldsOne');
-		
 		let fieldsTwo = $(fromTemplate).find('select.fieldsTwo');
-		
 		selectedTableNodeInfo.forEach(function(value, key, map){
 			let optgroup = $("<optgroup>").attr("label",key);
 			for (let item of value){
@@ -298,6 +300,190 @@ $(function(){
 		e.stopImmediatePropagation();
 		e.stopPropagation();
 	})
+	
+	// select部分
+	$("#selectBtn").on("click",function(e){
+		// 判断select部分是否已经生成了selectTemplate
+		let selectTemplate = $(".selectBody").find(".selectTemplate");
+		if(selectTemplate.length>0){
+			return;
+		}
+		// 判断from部分是否已经选择了表
+		let selectedTable = $(".fromBody").find("select.selectTable option:selected");
+		let flag = false;
+		for(let table=0;table<selectedTable.length;table++){
+			let ttable = selectedTable[table].value;
+			if(ttable!=""){
+				flag = true;
+			}
+		}
+		if(flag){
+			addSelect(e);
+		}else{
+			alert("请先从from中选择表");
+			return;
+		}
+		
+	});
+	
+	/**
+	 * 添加selectTemplate
+	 * @param {Object} e
+	 */
+	function addSelect(e){
+		let selectTemplate = $(".selectTemplate").clone(true);
+		addSelectOptions(selectTemplate);
+		$(selectTemplate).appendTo($(".selectBody"));
+		selectTemplate.attr("class","selectTemplateOne");
+		selectTemplate.show();
+		e.preventDefault();
+		e.stopImmediatePropagation();
+		e.stopPropagation();
+	}
+	
+	/**
+	 * 给selectTemplate的select框赋值
+	 * @param {Object} selectTemplate
+	 */
+	function addSelectOptions(selectTemplate){
+		let expressionOption = '';
+		for(i in expression){
+			expressionOption += '<option value="'+expression[i]+'">'+expression[i]+'</option>';
+		}
+		let expressionSelect = selectTemplate.find('select.expression');
+		expressionSelect.html(expressionOption);
+		expressionSelect.selectpicker({
+			width: '140px'
+		});
+		
+		let selectFields = selectTemplate.find("select.selectFields");
+		selectedTableNodeInfo.forEach(function(value, key, map){
+			let optgroup = $("<optgroup>").attr("label",key);
+			for (let item of value){
+				let option = new Option(item,item);
+				optgroup.append(option);
+			}
+			selectFields.append(optgroup[0]);
+		});
+		selectFields.selectpicker({
+			width: '140px'
+		});
+	}
+	
+	/**
+	 * select部分的删除操作
+	 */
+	$(".selectBody").on('click','.selectRemove',function(e){
+		$(this).closest(".selectTemplateOne").remove();
+		e.preventDefault();
+		e.stopImmediatePropagation();
+		e.stopPropagation();
+	});
+	
+	/**
+	 * select部分的添加操作
+	 */
+	$(".selectBody").on("click", ".selectAdd", function(e){
+		addSelect(e);
+	});
+	
+	// where部分操作
+	$("#whereBtn").click(function(e){
+		// 判断whereBody中是否已存在whereTemplate
+		let whereTemplate = $(".whereBody").find(".whereTemplateOne");
+		if(whereTemplate.length>0){
+			return;
+		}
+		// 判断from部分是否已经选择了表
+		let selectedTable = $(".fromBody").find("select.selectTable option:selected");
+		flag = false;
+		for(let table=0;table<selectedTable.length;table++){
+			let ttable = selectedTable[table].value;
+			if(ttable!=""){
+				flag = true;
+			}
+		}
+		if(flag){
+			addWhere(e);
+		}else{
+			alert("请先从from中选择表")
+		}
+	});
+	
+	/**
+	 * 添加whereTemplate
+	 * @param {Object} e
+	 */
+	function addWhere(e){
+		let whereTemplate = $(".whereTemplate").clone();
+		addWhereOptions(whereTemplate);
+		$(whereTemplate).appendTo($(".whereBody"));
+		whereTemplate.attr("class","whereTemplateOne");
+		whereTemplate.show();
+		e.preventDefault();
+		e.stopImmediatePropagation();
+		e.stopPropagation();
+	}
+	
+	/**
+	 * 为whereTemplate的select添加option
+	 * @param {Object} e
+	 */
+	function addWhereOptions(whereTemplate){
+		let operatorsOption = '';
+		for(i in logicalOperators){
+			operatorsOption += '<option value="'+logicalOperators[i]+'">'+logicalOperators[i]+'</option>';
+		}
+		let logicalOperatorsOption = $(whereTemplate).find(".logicalOperators");
+		logicalOperatorsOption.html(operatorsOption);
+		logicalOperatorsOption.selectpicker({
+			width: '140px'
+		});
+	}
+	
+	/**
+	 * addCondition点击事件
+	 */
+	$(".whereBody").on("click",".addCondition",function(e){
+		let conditionTemplate = $('.conditionTemplate').clone();
+		conditionTemplate.show();
+		addConditionOption(conditionTemplate);
+		$(conditionTemplate).appendTo($(".group-conditions"));
+		conditionTemplate.attr('class','conditionTemplateOne');
+		e.preventDefault();
+		e.stopImmediatePropagation();
+		e.stopPropagation();
+	});
+	
+	/**
+	 * 给conditionTemplate模板的select添加option
+	 * @param {Object} conditionTemplate
+	 */
+	function addConditionOption(conditionTemplate) {
+		let whereFields = $(conditionTemplate).find("select.whereFields");
+	    selectedTableNodeInfo.forEach(function(value, key, map){
+	    	let optgroup = $("<optgroup>").attr("label",key);
+	    	for (let item of value){
+	    		let option = new Option(item,item);
+	    		optgroup.append(option);
+	    	}
+	    	whereFields.append(optgroup[0]);
+	    });
+	    whereFields.selectpicker({
+	    	width: '140px'
+	    });
+	
+		//关系运算符选项
+		let comparisonOption = '<option value="">请选择</option>';
+		for (i in comparisons) {
+		    comparisonOption += '<option>' + comparisons[i] + '</option>'
+		}
+		let comparisonsSelect = $(conditionTemplate).find('select.comparisons');
+		comparisonsSelect.html(comparisonOption);
+		comparisonsSelect.selectpicker({
+			width: '100px'
+		});
+	}
 	
 	
 	showTableTree();
