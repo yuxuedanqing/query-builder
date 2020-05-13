@@ -1,3 +1,7 @@
+$(document).on('change', '.from', function(e) {
+    updateJson('from', e);
+});
+
 $("#fromBtn").click(function(e) {
 	// 判断左侧是否已选择表
 	let checkTableIsSelected = selectedTables.size > 0 ? true : false;
