@@ -9,19 +9,20 @@
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="js/bootstrap-select/css/bootstrap-select.min.css">
 		<style>
-			.whereTemplateOne{
+			.whereTemplateOne,.havingTemplateOnee{
 			    background-color: #fff;
 			    padding: 15px;
 			    border-radius: 5px;
 			    border: solid 1px #666;
 			}
-			.whereBody,.fromTemplateOnee,.selectTemplateOne{
+			.whereTemplateOne,.fromTemplateOnee,
+			.selectTemplateOne,.groupByTemplateOne,
+			.havingTemplateOnee,.havingTemplateTwoo,
+			.orderByTemplateOne,.conditionTemplateOne{
 				margin-left: 20px;
 				margin-top: 10px;
 			}
-			.whereTemplate,{
-				margin-top: 10px;
-			}
+			
 		</style>
 	</head>
 	<body>
@@ -95,7 +96,7 @@
 						</div>
 						<br />
 						<div class="having">
-							<button type="button" class="btn btn-primary">
+							<button type="button" class="btn btn-primary" id="havngBtn">
 								<span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Having
 							</button>
 							<div class="havingBody">
@@ -104,7 +105,7 @@
 						</div>
 						<br />
 						<div class="order-by">
-							<button type="button" class="btn btn-primary">
+							<button type="button" class="btn btn-primary" id="orderByBtn">
 								<span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Order by
 							</button>
 							<div class="order-by-body">
@@ -238,9 +239,49 @@
 			<button class="btn btn-danger groupbyRemove"><span class="glyphicon glyphicon-minus"></span></button>
 		</div>
 		
-		<!--order by模板-->
-		<div class="orderByTemplate">
+		<!--having模板1-->
+		<div class="havingTemplateOne" style="display: none;">
+			<select class = "from-control logicalOperators"></select>
+			<button class="btn btn-success addConditionHaving"><span class="glyphicon glyphicon-plus"></span> Add Condition</button>
+			<button class="btn btn-success addGroupHaving"><span class="glyphicon glyphicon-plus"></span> Add Group</button>
+			<button class="btn btn-danger removeGroupHaving"><span class="glyphicon glyphicon-minus"></span> Remove Group</button>
+			<div class="havingBody">
 			
+			</div>
+		</div>
+		<!--having模板2-->
+		<div class="havingTemplateTwo" style="display: none;">
+			<div class="row">
+				<div class="col-sm-2">
+					<div class="form-group">
+						<select class="form-control expression"></select>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<select class="form-control fields"></select>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-group">
+						<select class="form-control comparisons"></select>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<input class="form-control inputValue" type="text"/>
+					</div>
+				</div>
+				<button class="btn btn-danger removeConditionHaving"><span class="glyphicon glyphicon-minus"></span></button>
+			</div>
+		</div>
+		
+		<!--order by模板-->
+		<div class="orderByTemplate" style="display: none;">
+			<select class = "form-control fields"></select>
+			<select class = "form-control orderBy"></select>
+			<button class="btn btn-success orderAdd"><span class="glyphicon glyphicon-plus"></span></button>
+			<button class="btn btn-danger orderRemove"><span class="glyphicon glyphicon-minus"></span></button>
 		</div>
 		<script src="js/jquery-3.5.0.min.js"></script>
 		<script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
