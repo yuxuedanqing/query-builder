@@ -1,3 +1,7 @@
+$(document).on('change', '.where', function(e) {
+    updateJson('where', e);
+});
+
 $("#whereBtn").click(function(e) {
 	// 判断whereBody中是否已存在whereTemplate
 	let whereTemplate = $(".whereBody").find(".whereTemplateOne");

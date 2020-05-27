@@ -62,7 +62,7 @@ function processFrom(dom) {
 }
 
 function processWhere(dom, where, prevOp) {
-    var len = $(dom).find('[rel="Group"]').length;
+    var len = $(dom).find('.whereTemplateOne').length;
     var finalResult = '';
     if (len == 0) {
         return finalResult;
@@ -72,7 +72,7 @@ function processWhere(dom, where, prevOp) {
         // var prevResult = result;
         for (i = 0; i <= len - 1; i++) {
             result = '';
-            var group = $(dom).find('[rel="Group"]')[i];
+            var group = $(dom).find('.whereTemplateOne')[i];
             if (lastOp != null) {
                 finalResult = finalResult + ' ' + lastOp;
 
@@ -83,22 +83,19 @@ function processWhere(dom, where, prevOp) {
             }
 
             //do processing here and put result in finalResult
-            var currentOperator = $(group).children('.logicalOperators').val();
-            var condition = $(group).find('.group-conditions')[0];
+            var currentOperator = $(group).children('.logicalOperators').find(':selected').val();
+            var condition = $(group).find('.whereBody')[0];
+			console.log(currentOperator);
             $(condition).children().each(function() {
-                if ($(this).attr('class') == 'condition') {
+                if ($(this).attr('class') == 'conditionTemplateOne') {
                     if (result != '') {
                         result = result + ' ' + currentOperator + ' ';
                     }
-					var table = $(this).find('.fields').find(':selected')[0].parentNode.label;
-                    var field = table + '.' + $(this).find('.fields').val();
-                    var operator = $(this).find('.comparisons').val();
-                    var value = "'" + $(this).find('#Value').val() + "'";
-
-
+					var table = $(this).find('.whereFields option:selected').parent().attr("label");
+                    var field = table + '.' + $(this).find('.whereFields option:selected').val();
+                    var operator = $(this).find('.comparisons option:selected').val();
+                    var value = "'" + $(this).find('.inputValue').val() + "'";
                     result = result + field + ' ' + operator + ' ' + value;
-
-
                 }
 
             });
@@ -254,7 +251,7 @@ function updateJson(clause,e){
 	
 	} else if (clause == 'where') {
 	    where = '';
-	    var where_con = $('#where');
+	    var where_con = $('.where');
 	    var where = processWhere(where_con, where);
 	    if (where != '') {
 	        where = 'WHERE ' + where;
