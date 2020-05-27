@@ -30,7 +30,7 @@ function addFrom(that, e) {
 	}).on('click','.removeJoinBtn',function(e){
 		$(this).closest(".fromTemplateOnee").remove();
 	});
-	fromTemplateOne.attr("class", "fromTemplateOnee");
+	fromTemplateOne.attr("class", "fromTemplateOnee frmTemp");
 	fromTemplateOne.show();
 	e.preventDefault();
 	e.stopImmediatePropagation();
@@ -64,7 +64,7 @@ function addJoin(that, e) {
 	}).on('click','.addJoinBtn',function(e){
 		addJoin($('#fromBtn'), e);
 	});
-	fromTemplateTwo.attr("class", "fromTemplateTwoo");
+	fromTemplateTwo.attr("class", "fromTemplateTwoo frmTemp");
 	fromTemplateTwo.show();
 	e.preventDefault();
 	e.stopImmediatePropagation();

@@ -30,23 +30,24 @@ function processSelect(dom) {
 
 function processFrom(dom) {
 	var from = '';
-	var from_model = $(dom).find('.from-model');
+	var from_model = $(dom).find('.fromBody');
 	$(from_model).children().each(function(e) {
-		if ($(this).attr('class') == 'frm') {
+		if ($(this).attr('class').indexOf('frmTemp')!=-1) {
 			// logic for join
-			var join = $(this).find('#join').val();
-			if (typeof(join) != 'undefined') {
-
-				var col1 = $(this).find('.fields1').val();
-				var col2 = $(this).find('.fields2').val();
-				var ope = $(this).find('.comparisons').val();
-				var table1 = $(this).prev().find('.fromModel').val();
-				var table2 = $(this).find('.fromModel').val();
-				from += ' ' + join + ' ' + table2 + ' ON ' + table1 + '.' + col1 + ope + table2 + '.' + col2;
+			var join = $(this).find('.join option:selected').val();
+			if (typeof(join) != 'undefined' && join != null && join!='') {
+				console.log(join)
+				var col1 = $(this).find('.fieldsOne option:selected').parent().attr("label")+"."+$(this).find('.fieldsOne option:selected').val();
+				var col2 = $(this).find('.fieldsTwo option:selected').parent().attr("label")+"."+$(this).find('.fieldsTwo option:selected').val();
+				var ope = $(this).find('.comparisons option:selected').val();
+				var table1 = $(this).prev().find('.selectTable option:selected').val();
+				var table2 = $(this).find('.selectTable option:selected').val();
+				console.log(table1,table2);
+				from += ' ' + join + ' ' + table2 + ' ON ' + col1 + ope + col2;
 
 			} else {
-				var x = $(this).find('.fromModel').val();
-				if (from.indexOf(x) != -1) {
+				var x = $(this).find('.selectTable').find('option:selected').selectpicker('val').get(0).value;
+				if (from!=='' && from.indexOf(x) != -1) {
 					alert('Table already added!')
 				} else {
 					if (from != '') {
