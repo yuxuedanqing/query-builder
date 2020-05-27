@@ -3,12 +3,12 @@
  */
 function processSelect(dom) {
 	var select = '';
-	var select_lines = $(dom).find('.select-lines');
+	var select_lines = $(dom).find('.selectBody');
 	$(select_lines).children().each(function(e) {
-		if ($(this).attr('class') == 'Select') {
-			var table = $(this).find('.selectFields').find(':selected')[0].parentNode.label;
-			var x = table + '.' + $(this).find('.selectFields').val();
-			var exp = $(this).find('.expression').val();
+		if ($(this).attr('class') == 'selectTemplateOne') {
+			var table = $(this).find('.selectFields option:selected').parent().attr("label");
+			var x = table + '.' + $(this).find('.selectFields option:selected').val();
+			var exp = $(this).find('.expression option:selected').val();
 			if (exp != '') {
 				x = exp + ' (' + x + ')';
 			}
@@ -236,7 +236,7 @@ function processOrder(dom){
  */
 function updateJson(clause,e){
 	if (clause == 'select') {
-	    var select_con = $('#select');
+	    var select_con = $('.select');
 	    var select = processSelect(select_con);
 	    if (select != '') {
 	        select = 'SELECT  ' + select;

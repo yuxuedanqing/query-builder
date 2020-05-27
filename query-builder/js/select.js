@@ -1,3 +1,7 @@
+$(document).on('change', '.select', function(e) {
+    updateJson('select',e);
+});
+
 $("#selectBtn").on("click", function(e) {
 	// 判断select部分是否已经生成了selectTemplate
 	let selectTemplate = $(".selectBody").find(".selectTemplate");
