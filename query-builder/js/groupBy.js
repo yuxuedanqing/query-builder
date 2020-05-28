@@ -39,6 +39,7 @@ function addGroupBy(that, e) {
 		addGroupBy("#groupByBtn", e);
 	}).on('click', '.groupbyRemove', function(e) {
 		$(this).closest('.groupByTemplateOne').remove();
+		updateJson('groupby', e);
 	});
 	e.preventDefault();
 	e.stopImmediatePropagation();

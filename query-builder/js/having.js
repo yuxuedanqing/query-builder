@@ -39,6 +39,7 @@ function addHaving(that, e) {
 		addHaving(this, e);
 	}).on('click', '.removeGroupHaving', function(e) {
 		removeGroupHaving(this, e);
+		updateJson('having', e);
 	});
 	havingTemplate.attr('class', 'havingTemplateOnee');
 	havingTemplate.show();
@@ -73,6 +74,7 @@ function addConditionHaving(that, e) {
 	addConditioHavingOption(havingTemplateTwo);
 	$(havingTemplateTwo).appendTo($(that).siblings('.havingBody')).on('click', '.removeConditionHaving', function(e) {
 		removeConditionHaving(this, e);
+		updateJson('having', e);
 	})
 	havingTemplateTwo.attr('class', 'havingTemplateTwoo');
 	havingTemplateTwo.show();

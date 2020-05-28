@@ -35,6 +35,7 @@ function addWhere(that, e) {
 		addCondition(this, e);
 	}).on("click", ".removeGroup", function(e) {
 		removeGroup(this, e);
+		updateJson('where', e);
 	}).on("click", ".addGroup", function(e) {
 		addWhere(this, e);
 	});
@@ -70,6 +71,7 @@ function addCondition(that, e) {
 	addConditionOption(conditionTemplate);
 	$(conditionTemplate).appendTo($(that).siblings(".whereBody")).on("click", ".removeCondition", function(e) {
 		removeCondition(this, e);
+		updateJson('where', e);
 	});
 	conditionTemplate.attr('class', 'conditionTemplateOne');
 	e.preventDefault();
@@ -96,7 +98,7 @@ function addConditionOption(conditionTemplate) {
 	});
 
 	//关系运算符选项
-	let comparisonOption = '<option value="">请选择</option>';
+	let comparisonOption = '';
 	for (i in comparisons) {
 		comparisonOption += '<option>' + comparisons[i] + '</option>'
 	}

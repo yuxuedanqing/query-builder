@@ -37,6 +37,7 @@ function addOrderBy(that, e) {
 		addOrderBy($('#orderByBtn'), e);
 	}).on('click', '.orderRemove', function(e) {
 		$(this).closest('.orderByTemplateOne').remove();
+		updateJson('order', e);
 	});
 	orderByTemplate.attr('class', 'orderByTemplateOne');
 	orderByTemplate.show();

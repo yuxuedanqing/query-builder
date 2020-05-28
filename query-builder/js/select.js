@@ -37,6 +37,7 @@ function addSelect(that, e) {
 		addSelect($("#selectBtn"),e);
 	}).on('click','.selectRemove',function(e){
 		$(this).closest(".selectTemplateOne").remove();
+		updateJson('select',e);
 	});
 	selectTemplate.attr("class", "selectTemplateOne");
 	selectTemplate.show();

@@ -36,13 +36,11 @@ function processFrom(dom) {
 			// logic for join
 			var join = $(this).find('.join option:selected').val();
 			if (typeof(join) != 'undefined' && join != null && join!='') {
-				console.log(join)
 				var col1 = $(this).find('.fieldsOne option:selected').parent().attr("label")+"."+$(this).find('.fieldsOne option:selected').val();
 				var col2 = $(this).find('.fieldsTwo option:selected').parent().attr("label")+"."+$(this).find('.fieldsTwo option:selected').val();
 				var ope = $(this).find('.comparisons option:selected').val();
 				var table1 = $(this).prev().find('.selectTable option:selected').val();
 				var table2 = $(this).find('.selectTable option:selected').val();
-				console.log(table1,table2);
 				from += ' ' + join + ' ' + table2 + ' ON ' + col1 + ope + col2;
 
 			} else {
@@ -85,7 +83,6 @@ function processWhere(dom, where, prevOp) {
             //do processing here and put result in finalResult
             var currentOperator = $(group).children('.logicalOperators').find(':selected').val();
             var condition = $(group).find('.whereBody')[0];
-			console.log(currentOperator);
             $(condition).children().each(function() {
                 if ($(this).attr('class') == 'conditionTemplateOne') {
                     if (result != '') {
@@ -211,7 +208,6 @@ function processOrder(dom){
 	            alert('Field already added!')
 	        } else {
 	            var by = $(this).find('.orderBy option:selected').val();
-				console.log(by);
 	            if (by == 'Ascending') {
 	                by = 'ASC';
 	            } else if (by == 'Descending') {
