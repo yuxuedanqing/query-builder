@@ -75,6 +75,9 @@ function getSelectSqlResult(){
 	let selectSql = outputSelect + outputFrom + outputWhere + outputGroupby + outputHaving + outputOrderby;
 	
 	$("#sqlExecuteResult").DataTable({
+		"processing": true,
+		// 去掉过滤
+		"bFilter": false,
 		"searching" : false,
 		"ajax" : {
 			"url": "json/selectResult.json"
