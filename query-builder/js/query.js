@@ -118,10 +118,11 @@ function processWhere(dom, where, prevOp) {
 
 function processGroupby(dom){
 	var groupby = '';
-	var groupby_lines = $(dom).find('.groupby-line');
+	var groupby_lines = $(dom).find('.group-by-body');
 	$(groupby_lines).children().each(function(e) {
-	    if ($(this).attr('class') == 'grpby') {
-	        var x = $(this).find('.groupbyFields').val();
+	    if ($(this).attr('class') == 'groupByTemplateOne') {
+			var table = $(this).find('.groupbyFields option:selected').parent().attr("label");
+	        var x = table + '.' + $(this).find('.groupbyFields option:selected').val();
 	        if (groupby.indexOf(x) != -1) {
 	            alert('Column already added!')
 	        } else {
@@ -258,7 +259,7 @@ function updateJson(clause,e){
 	    }
 	    $('#outputWhere').text(where);
 	} else if (clause == 'groupby') {
-	    var group_by = $('#groupby');
+	    var group_by = $('.group-by');
 	    var groupby = processGroupby(group_by);
 	    if (groupby != '') {
 	        groupby = 'GROUP BY  ' + groupby;

@@ -1,3 +1,7 @@
+$(document).on('change', '.group-by', function(e) {
+    updateJson('groupby', e);
+});
+
 $("#groupByBtn").click(function(e) {
 	// 判断group by是否以及生成了groupByTemplate
 	let groupByTemplate = $(".group-by-body").find(".groupByTemplateOne");
