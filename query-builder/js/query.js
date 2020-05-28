@@ -162,7 +162,6 @@ function processHaving(dom){
 	        //do processing here and put result in finalResult
 	        var currentOperator = $(group).children('.logicalOperators').find(':selected').val();
 	        var condition = $(group).find('.havingBody')[0];
-			console.log(condition);
 	        $(condition).children().each(function() {
 	            if ($(this).attr('class') == 'havingTemplateTwoo') {
 	                if (result != '') {
@@ -173,7 +172,6 @@ function processHaving(dom){
 	                var field = table + '.' + $(this).find('.fields option:selected').val();
 	                var operator = $(this).find('.comparisons option:selected').val();
 	                var value = "'" + $(this).find('.inputValue').val() + "'";
-					console.log(table,expression,field,operator,value);
 	                if (expression != '') {
 	                    result += expression + '(' + field + ') ' + operator + ' ' + value;
 	
@@ -204,14 +202,16 @@ function processHaving(dom){
 
 function processOrder(dom){
 	var order = '';
-	var order_lines = $(dom).find('.order-by');
+	var order_lines = $(dom).find('.order-by-body');
 	$(order_lines).children().each(function(e) {
-	    if ($(this).attr('class') == 'Order') {
-	        var x = $(this).find('.fields').val();
+	    if ($(this).attr('class') == 'orderByTemplateOne') {
+			var table = $(this).find('.fields option:selected').parent().attr("label");
+	        var x = table + '.' + $(this).find('.fields option:selected').val();
 	        if (order.indexOf(x) != -1) {
 	            alert('Field already added!')
 	        } else {
-	            var by = $(this).find('.orderBy').val();
+	            var by = $(this).find('.orderBy option:selected').val();
+				console.log(by);
 	            if (by == 'Ascending') {
 	                by = 'ASC';
 	            } else if (by == 'Descending') {
@@ -277,7 +277,7 @@ function updateJson(clause,e){
 	    }
 	    $('#outputHaving').text(having);
 	} else if (clause == 'order') {
-	    var order_by = $('#order');
+	    var order_by = $('.order-by');
 	    var order = processOrder(order_by);
 	    if (order != '') {
 	        order = 'ORDER  ' + order;

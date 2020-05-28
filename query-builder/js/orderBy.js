@@ -1,3 +1,7 @@
+$(document).on('change', '.order-by', function(e) {
+    updateJson('order', e);
+});
+
 $("#orderByBtn").click(function(e) {
 	// 判断order by是否已有模板
 	let orderByTemplate = $(".order-by-body").find(".orderByTemplateOne");
