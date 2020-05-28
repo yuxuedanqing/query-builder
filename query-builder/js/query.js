@@ -139,7 +139,7 @@ function processGroupby(dom){
 }
 
 function processHaving(dom){
-	var len = $(dom).find('[rel="Having"]').length;
+	var len = $(dom).find('.havingTemplateOnee').length;
 	var finalResult = '';
 	if (len == 0) {
 	    return finalResult;
@@ -149,7 +149,7 @@ function processHaving(dom){
 	    // var prevResult = result;
 	    for (i = 0; i <= len - 1; i++) {
 	        result = '';
-	        var group = $(dom).find('[rel="Having"]')[i];
+	        var group = $(dom).find('.havingTemplateOnee')[i];
 	        if (lastOp != null) {
 	            finalResult = finalResult + ' ' + lastOp;
 	
@@ -160,17 +160,20 @@ function processHaving(dom){
 	        }
 	
 	        //do processing here and put result in finalResult
-	        var currentOperator = $(group).children('.logicalOperators').val();
-	        var condition = $(group).find('.having-conditions')[0];
+	        var currentOperator = $(group).children('.logicalOperators').find(':selected').val();
+	        var condition = $(group).find('.havingBody')[0];
+			console.log(condition);
 	        $(condition).children().each(function() {
-	            if ($(this).attr('class') == 'condition_having') {
+	            if ($(this).attr('class') == 'havingTemplateTwoo') {
 	                if (result != '') {
 	                    result = result + ' ' + currentOperator + ' ';
 	                }
-	                var expression = $(this).find('.expression').val();
-	                var field = $(this).find('.fields').val();
-	                var operator = $(this).find('.comparisons').val();
-	                var value = "'" + $(this).find('#ValueHaving').val() + "'";
+					var table = $(this).find('.fields option:selected').parent().attr("label");
+	                var expression = $(this).find('.expression option:selected').val();
+	                var field = table + '.' + $(this).find('.fields option:selected').val();
+	                var operator = $(this).find('.comparisons option:selected').val();
+	                var value = "'" + $(this).find('.inputValue').val() + "'";
+					console.log(table,expression,field,operator,value);
 	                if (expression != '') {
 	                    result += expression + '(' + field + ') ' + operator + ' ' + value;
 	
@@ -267,7 +270,7 @@ function updateJson(clause,e){
 	
 	    $('#outputGroupby').text(groupby);
 	} else if (clause == 'having') {
-	    var having_d = $('#having');
+	    var having_d = $('.having');
 	    var having = processHaving(having_d);
 	    if (having != '') {
 	        having = 'HAVING  ' + having;

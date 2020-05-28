@@ -1,3 +1,7 @@
+$(document).on('change', '.having', function(e) {
+    updateJson('having', e);
+});
+
 $("#havngBtn").click(function(e) {
 	// 判断having是否以及生成了havingTemplate
 	let havingTemplate = $(".havingBody").find(".havingTemplateOnee");
