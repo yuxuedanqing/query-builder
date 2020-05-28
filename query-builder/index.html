@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="js/jstree/dist/themes/default/style.min.css" />
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="js/bootstrap-select/css/bootstrap-select.min.css">
+		<link rel="stylesheet" href="js/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
 		<style>
 			.whereTemplateOne,.havingTemplateOnee{
 			    background-color: #fff;
@@ -144,7 +145,20 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">查询结果</div>
 					<div class="panel-body">
-						
+						<div class="row">
+							<div class="col-md-12">
+								<table class="table table-striped table-bordered" id="sqlExecuteResult">
+									<thead>
+										<tr>
+											
+										</tr>
+									</thead>
+									<tbody>
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -303,6 +317,9 @@
 
 		<!-- (Optional) Latest compiled and minified JavaScript translation files -->
 		<script src="js/bootstrap-select/js/i18n/defaults-zh_CN.js"></script>
+		<!-- DataTable -->
+		<script src="js/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script src="js/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
 		<script src="js/custom.js"></script>
 		<script src="js/leftTree.js"></script>
 		<script src="js/query.js"></script>
